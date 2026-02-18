@@ -371,3 +371,9 @@ int main() {
 ## 🔹 Nota importante
 
 El tamaño exacto en bytes puede variar dependiendo del sistema operativo y la arquitectura (32 bits o 64 bits).
+
+- Más recursos teóricos:
+    1. [Primer Código en C](./PrimerasClases/prueba.c)
+    2. [Comandos](./PrimerasClases/README.md)
+    3. [printf](./PrimerasClases/documentacion.md)
+    
