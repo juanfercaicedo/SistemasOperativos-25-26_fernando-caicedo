@@ -5,10 +5,12 @@
 
 int main(void){
     char nombre[SIZE];
-    printf("Escribe tus nombres y tus apellidos");
+    printf("Escribe tus nombres y tus apellidos: ");
     fgets(nombre, SIZE, stdin); //stdin(Standard input), puede ser reemplazado por un 0.
     if((strlen(nombre)>0)&&nombre[strlen(nombre)-1]== '\n'){
         nombre[strlen(nombre)-1]='\0';
     }
     printf("Hola %s, igual y acabas aprobando sistemas operativos\n", nombre);
+
+    return 0; 
 }
