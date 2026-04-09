@@ -37,6 +37,7 @@ int main(void) {
     if (hijo < 0) {
         // Error al crear el proceso
         perror("Error en fork");
+        munmap(memoria_compartida, sizeof(int) * N); // Liempiza básica en C
         exit(EXIT_FAILURE);
         
     } else if (hijo == 0) {
