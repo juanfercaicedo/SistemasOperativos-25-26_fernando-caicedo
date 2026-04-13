@@ -53,7 +53,6 @@ int main(void) {
         srand(time(NULL));
         int numeroRecibo = rand()%100000;
         
-
         write(mi_tuberia[1], &numeroRecibo, sizeof(numeroRecibo));
         close(mi_tuberia[1]);
         exit(0);
