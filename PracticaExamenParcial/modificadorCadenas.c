@@ -22,7 +22,7 @@ int modificarCadena(char *stringAModificar) {
 
     // Recorremos la cadena hasta encontrar el carácter nulo '\0' que marca el final
     // Usamos el puntero iterando directamente sobre la memoria
-    while (*stringAModificar != '\0') { // '\0' --> Caracter Nulo
+    while (*stringAModificar != '\0') { // '\0' --> Carácter Nulo
         
         // El fgets captura también el "Enter" (\n), así que aprovechamos para eliminarlo
         // y no contarlo como un carácter válido de la frase
