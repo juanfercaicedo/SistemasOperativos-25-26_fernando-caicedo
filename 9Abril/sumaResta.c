@@ -4,11 +4,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/mman.h>
+#include <semaphore.h>
+#include <fcntl.h>
 
 #define TAMAÑO 10000
 
 int main(void) {
     pid_t hijo;
+    sem_t *semaforo;
+    semaforo = sem_open("/mi_semaforo", O_CREAT, S_IRUSR, | S_IWUSR, 1);
+    
     int *sumas;
 
     sumas = mmap(NULL, sizeof(int) * 2, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1,0);
@@ -22,7 +27,9 @@ int main(void) {
     } else if (hijo == 0) {
         int resultadoHijo = 0;
         for(int i = 0; i < TAMAÑO; i ++){
+            sem_wait(semaforo);
             resultadoHijo += i;
+            sem_post(semaforo);
         }
         sumas[0] = resultadoHijo;
 
@@ -30,7 +37,10 @@ int main(void) {
     } else {
         int resultadoPadre = 0;
         for(int i = 0; i < TAMAÑO; i++) {
+            sem_wait(semaforo);
             resultadoPadre -= i;
+            sem_post(semaforo);
+
         }
 
         sumas[1] = resultadoPadre;
