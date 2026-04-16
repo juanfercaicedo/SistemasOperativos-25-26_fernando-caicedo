@@ -75,6 +75,7 @@ int main(void) {
         exit(1);
     } else if (hijo == 0) { // Proceso del Hijo/Cajero
         int conteoTransacciones = 0;
+        int conteoRetiros = 0;
         int numerosTransaccionesRecibidos[numeroTransacciones];
         close(mi_tuberia[1]);
         read(mi_tuberia[0], numerosTransaccionesRecibidos, sizeof(numerosTransaccionesRecibidos));
@@ -88,11 +89,12 @@ int main(void) {
             if(numerosTransaccionesRecibidos[i] > 0){
                 conteoTransacciones++;
             }
+
         }
         exit(conteoTransacciones);
     } else { // Proceso del Padre/Cliente
         int estado;
-        int depositosCreados;
+        int depositosRealizados;
         close(mi_tuberia[0]);
         write(mi_tuberia[1], cantidadTransacciones, sizeof(cantidadTransacciones));
         close(mi_tuberia[1]);
@@ -100,11 +102,11 @@ int main(void) {
         wait(&estado);
 
         if(WIFEXITED(estado)) {
-            depositosCreados = WEXITSTATUS(estado);
+            depositosRealizados = WEXITSTATUS(estado);
             
             printf("\n--- REPORTE DEL CAJERO ---\n");
             printf("Saldo inicial de la cuenta: $1000\n");
-            printf("La cantidad de depósitos procesados (mayores a 0) son: %d\n", depositosCreados);
+            printf("La cantidad de depósitos procesados (mayores a 0) son: %d\n", depositosRealizados);
             
             printf("El saldo FINAL de la cuenta es: $%d\n", *memoria_compartida);
             
