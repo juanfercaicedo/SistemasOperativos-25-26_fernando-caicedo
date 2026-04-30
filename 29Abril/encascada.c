@@ -13,8 +13,28 @@ void calcula() {
 }
 
 pthread_t array[LIMITE];
-int n = 1;
+int n = 0;
+
+void *createThread();
 
 int main(void) {
+    pthread_create(&array[n], NULL, &createThread, NULL);
+    pthread_join(array[n], NULL);
+    return 0;
+}
 
+void *createThread() {
+    printf("He nacido. Soy el hilo con ID %lu \n", pthread_self());
+
+    n++;
+    calcula();
+    if(n < LIMITE) {
+        pthread_create(&array[n], NULL, &createThread, NULL);
+        pthread_join(array[n], NULL);
+    } else {
+        char g[10];
+        fgets(g, sizeof(g), stdin);
+    }
+    pritnf("Soy el hilo con un ID %lu y acabo mi ejecucióm \n", pthread_self());
+    return 0;
 }
