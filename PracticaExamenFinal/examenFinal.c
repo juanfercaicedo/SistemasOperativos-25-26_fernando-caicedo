@@ -4,8 +4,8 @@
 #include <pthread.h>
 #include <signal.h>
 
-#define ROWS = 4
-#define COLS = 3
+#define ROWS 4
+#define COLS 3
 
 int matrix[ROWS][COLS], ipos, jpos, temp;
 pthread_t positivo, negativo, coordinador;
