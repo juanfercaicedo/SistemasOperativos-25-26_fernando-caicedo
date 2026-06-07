@@ -112,7 +112,49 @@
 - Si son iguales devuelve un `0`
 - `strcat`: String concatenate, une dos cadenas de texto 
 - `execlp`: *exec*, *list*, *path*, Reemplaza el proceso actual por un programa nuevo
+---
+## mmap (Memory Map / Memoria compartida)
+- Kernel reserva un espacio de memoria virtual
+- El objetivo es que un padre y un hijo compartan memoria, de esta forma cuando un hijo haga un cambio, el padre también lo tendrá
+- Necesitamos la librería `<sys/mman.h>`
+- Declaramos la variable de memoria compartida de la siguiente forma:
+```c
+    static int *variable_compartida;
 
+    int main(void){
+        variable_compartida = mmap(NULL, sizeof(*variable_compartida), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1,0);
+    }
+```
+- Siempre debemos declarar la memoria compartida antes de hacer un `fork()`
+- Siempre que ocupemos `mmap`, siempre al acabar tenemos que limpiar la memoria, lo hacemos mediante: `munmap`
+- Tenemos que liberar la memoria tanto del lado del padre como del hijo
+---
+## Semáforos 🚦
+- Un semáforo es un mecanismo de sincronización que sirve para controlar el acceso a recursos compartidos" 
+- Controla el acceso a la memoria compartida
+- Necesitaremos utilizar las librerias: `semaphore.h` y `fcntl.h`
+- Al igual que la memoria compartida, el semáforo lo debemos declarar antes que el fork();
+- Lo declaramos de la siguiente manera:
+```c
+    sem_t *semaforo = sem_open("/mi_semaforo", O_CREAT, S_IRUSR | S_IWUSR, 1);
+```
+- `sem_wait()` Cierra el semáforo
+- `sem_post()` Abre el flujo del semáforo
+- Tiene que ir en la sección crítica, es decir cuando modificamos el valor de la variable compartida
+- Al igual que con la memoria compartida, debemos cerrar el semáforo una vez haya acabado su función, lo hacemos mediante `sem_close()`
+- Y también eliminamos la clave del sistema con: `sem_unlink("/mi_semaforo);`
+---
+## Hilos 🧵
+- Unidad básica de utilización dentro del CPU
+- Un hilo es como un fork(), la diferencia es que no necesitamos de mmap, ya que ya comparte memoria
+- Lo declaramos de la siguiente manera:
+```c
+    pthread_t nombre_variable;
+```
+- `pthread_create(&nombre_variable, NULL, &nuevo_hilo, NULL);`: Crea un nuevo hilo
+- `pthread_self()`: Nos da el ID del hilo
+- `pthread_join()`: Es el equivalente del wait() en un `fork()`
+---
 ## Notas generales
 - Es mejor utilizar `fgets` en vez de `scanf` cuando estamos tratando con una cadena de caractéres, como puede ser una oración
 - Para lograr obtener un número aleatorio debemos ocupar la librería `<time.h>` y lo hacemos de la siguiente manera:
