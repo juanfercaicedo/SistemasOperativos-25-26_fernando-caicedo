@@ -18,7 +18,7 @@ int main(void){
         scanf("%d", &*variable_compartida);
         munmap(variable_compartida, sizeof(variable_compartida));
         exit(0);
-    } else if {
+    } else {
         puts("Soy el padre, quedo a la espera de que el hijo haga su trabajo");
         wait(NULL);
         printf("Soy el padre, y el hijo a cambiado su valor de la variable %d\n", *variable_compartida);
