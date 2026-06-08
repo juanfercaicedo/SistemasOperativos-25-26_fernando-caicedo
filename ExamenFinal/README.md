@@ -192,7 +192,14 @@ pthread_mutex_t nombreVariable;
     3. `SIGALRM`: (*Signal Alarm*): Le pide al sistema que le mande una señal, como una alarma temporal
     4. `SIGUSR1` y `SIGUSR2`: El sistema operativo no les tiene una tarea asignada, su función las determina el programador.
 - Para utilizar señales necesitamos la librería `<signal.h>`
-- 
+- Tenemos que utilizar un método para la señal en caso de que utilicemos SIGUSR1 y SIGUSR2, lo hacemos de la siguiente manera:
+```c
+void manejadorSeñal(int signum);
+
+int main(void) {
+    signal(SIGUSR1, manejadorSeñal);
+}
+```
 ---
 ## Notas generales
 - Es mejor utilizar `fgets` en vez de `scanf` cuando estamos tratando con una cadena de caractéres, como puede ser una oración
