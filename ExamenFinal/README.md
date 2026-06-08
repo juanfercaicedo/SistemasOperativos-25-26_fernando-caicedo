@@ -154,6 +154,35 @@
 - `pthread_create(&nombre_variable, NULL, &nuevo_hilo, NULL);`: Crea un nuevo hilo
 - `pthread_self()`: Nos da el ID del hilo
 - `pthread_join()`: Es el equivalente del wait() en un `fork()`
+- Los métodos que ejecutan un hilo siempre deben tener esta estructura:
+```c
+    void* hilo(void *arg) {
+    }
+```
+- `pthread_mutex()`: Mutal Exclusion
+- Controla el flujo
+    - Solo puede acceder uno a la vez
+    - `pthread_mutex()`-> Puede estar libre u ocupado
+- Lo declaramos de la siguente manera:
+```c
+pthread_mutex_t nombreVariable;
+```
+- Lo inicializamos de la siguiente manera:
+```c
+    pthread_mutex_init(&nombreVariable, NULL);
+```
+- Ahora siempre vamos a cerrar la "puerta" en cuando vayamos a entrar a una zona crítica, si hay otro hilo ocupodo `mutex` esperará a que se desocupe
+```c
+    pthread_mutex_lock(&nombreVariable);
+```
+- Después de haber modificado la zona crítica, como una variable compartida, tenemos que abrir el mutex
+```c
+    pthread_mutex_unlock(&nombreVariable);
+```
+- Por último al igual que la memoria compartida, debemos liberar el espacio una vez hayamos acabado
+```c
+    pthread_mutex_destroy(&nombreVariable);
+```
 ---
 ## Notas generales
 - Es mejor utilizar `fgets` en vez de `scanf` cuando estamos tratando con una cadena de caractéres, como puede ser una oración
