@@ -184,6 +184,16 @@ pthread_mutex_t nombreVariable;
     pthread_mutex_destroy(&nombreVariable);
 ```
 ---
+## Señales 📶
+- Interrumpen un proceso
+- Las 4 señales más usadas son:
+    1. `SIGINT`: (*Signal Interrupt*): Es la señal que se envía cuando el usuario pulsa Ctrl + C en la consola. Por defecto, su trabajo es matar al proceso educadamente.
+    2. `SIGKILL`: (*Signal Kill*): Mata a un proceso
+    3. `SIGALRM`: (*Signal Alarm*): Le pide al sistema que le mande una señal, como una alarma temporal
+    4. `SIGUSR1` y `SIGUSR2`: El sistema operativo no les tiene una tarea asignada, su función las determina el programador.
+- Para utilizar señales necesitamos la librería `<signal.h>`
+- 
+---
 ## Notas generales
 - Es mejor utilizar `fgets` en vez de `scanf` cuando estamos tratando con una cadena de caractéres, como puede ser una oración
 - Para lograr obtener un número aleatorio debemos ocupar la librería `<time.h>` y lo hacemos de la siguiente manera:
