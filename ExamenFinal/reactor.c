@@ -73,6 +73,8 @@ int main(void) {
     pthread_join(nucleo, NULL);
     pthread_join(monitor, NULL);
 
+    pthread_mutex_destroy(&lock);
+    pthread_cond_destroy(&nucleoInsertado);
     return 0;
 }
 
