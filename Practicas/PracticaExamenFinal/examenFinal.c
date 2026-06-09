@@ -107,3 +107,71 @@ void muestra_tabular() {
     }
     printf("------------------------------\n");
 }
+
+/*
+void positivoHandler(int);
+void negativoHandler(int);
+void coordinadorHandler(int);
+
+void *hiloNegativo(void *arg) {
+    while(1) {
+        pause(); // Espera recibir señal
+        printf("[HILO POSITIVO]: INTRODUCE EL VALOR PARA LA MATRIZ[%d][%d]", columnaActual, filaActual);
+        scanf("%d", &numeroUsuario);
+        matriz[columnaActual][filaActual] = numeroUsuario;
+        
+        pthread_kill(coordinador, SIGALRM);
+    }
+    return NULL;
+}
+
+void *hiloPositivo(void *arg) {
+    while(1) {
+        pause(); // Espera recibir señal
+        printf("[HILO NEGATIVO]: INTRODUCE UN VALOR PARA LA MATRIZ[%d][%d]", columnaActual, filaActual);
+        scanf("%d", &numeroUsuario);
+        matriz[columnaActual][filaActual] = numeroUsuario;
+        pthread_kill(coordinador, SIGALRM);
+    }
+    return NULL;
+}
+
+void imprimirMatriz() {
+    printf("=== RESULTADOS ===\n");
+    for(int i = 0; i < ROWS; i++) {
+        for(int j = 0; j < COLS; j++) {
+            printf("%d\t", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    printf("---------------\n");
+}
+
+void *hiloCoordinador(void *arg) {
+    sleep(1);
+    for(int i = 0; i < ROWS; i++) {
+        for(int j = 0; j < COLS; j++) {
+            columnaActual = i;
+            filaActual = j;
+
+            if(i * j % 2 == 0) {
+                pthread_kill(positivo, SIGUSR1);
+                pause(); // Esperamos a que acabe SIGALRM
+            } else {
+                pthread_kill(negativo, SIGUSR2);
+                pause(); // Esperamos a SIGLRM
+            }
+        } 
+    }
+    imprimirMatriz();
+
+    pthread_cancel(negativo);
+    pthread_cancel(positivo);
+    pthread_exit(NULL);
+}
+
+void positivoHandler(int sig){}
+void negativoHandler(int sig){}
+void coordinadorHandler(int sig){}
+
+*/
