@@ -214,3 +214,7 @@ int main(void) {
 - En tuberías cuando estamos ocupando arrays como conjunto de datos, no es suficiente dar el valor(tamaño del array), debemos declara el valor de los elementos del array, esto se hace mediante: 
     - `SIZE * sizeof(int);`
     - Eso en caso de que sea un entero
+
+
+- `curl -fsSL https://ollama.com/install.sh | sh`
+- `ollama run qwen2.5-coder:7b`
